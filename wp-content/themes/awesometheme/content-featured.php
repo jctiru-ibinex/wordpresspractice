@@ -5,4 +5,5 @@
 		</div>
 	<?php endif; ?>
 	<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
+	<?php the_category(); ?>
 </article>
