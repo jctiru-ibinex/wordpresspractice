@@ -16,17 +16,25 @@
 									$column=4;
 								}
 							?>
-							<div class="col-<?php echo $column; ?>">
+							<div class="col-md-<?php echo $column; ?>">
 								<?php if(has_post_thumbnail()): ?>
 									<?php $urlImg = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>
 								<?php endif; ?>
 								<div class="blog-element" style="background-image: url(<?php echo $urlImg; ?>);">
-									<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
+									<div>
+										<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
+										<?php the_category(); ?>
+									</div>
 								</div>
 							</div>
 							<?php //include(locate_template('content-blog.php', false, false)) ?>
 							<?php //get_template_part('content' , get_post_format()); ?>
-							<?php $i++; ?>
+							<?php 
+								$i++; 
+								if($i==6){
+									break;
+								}
+							?>
 						<?php endwhile ?>
 					<?php endif; ?>
 				</div>
