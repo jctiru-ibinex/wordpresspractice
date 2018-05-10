@@ -103,6 +103,9 @@ section .section-title {
       rgba(0, 0, 0, 0),
       rgba(0, 0, 0, 0.4)
     );
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .blog-element{

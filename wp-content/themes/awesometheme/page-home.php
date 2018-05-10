@@ -1,51 +1,51 @@
 <?php get_header(); ?>
 	<div class="container pt-5">
-		<div class="">
-			<div id="awesome-carousel" class="carousel slide" data-ride="carousel">
-		  		<?php $categories = get_categories(); ?>
-			 	<ol class="carousel-indicators">
-			 		<?php $count = 0; ?>
-			 		<?php foreach($categories as $category): ?>
-				    	<li data-target="#awesome-carousel" data-slide-to="<?php echo $count; ?>" class="<?php echo ($count==0)? 'active' : ''; ?>"></li>
-				    	<?php $count++; ?>
-				    <?php endforeach; ?>
-			  	</ol>
-			  	<div class="carousel-inner">
-			  		<?php $count = 0; ?>
-					<?php foreach($categories as $category): ?>
-						<?php 
-							$args = [
-								'type' => 'post',
-								'posts_per_page' => 1,
-								'category_name' => $category->slug
-							];
-							$lastBlogPost = new WP_Query($args);
-						 ?>
-						<?php if($lastBlogPost->have_posts()): ?>
-							<?php while($lastBlogPost->have_posts()): ?>
-								<?php $lastBlogPost->the_post(); ?>
-								<div class="carousel-item text-center <?php echo ($count==0)? 'active' : ''; ?>">
-									<?php the_post_thumbnail('full', ['class' => 'img-fluid img-thumbnail']); ?>
-									<div class="carousel-caption d-noned-md-block">
-										<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
-										<small><?php echo($category->name) ?></small>
-									</div>
+		<div id="awesome-carousel" class="carousel slide pb-5" data-ride="carousel">
+	  		<?php $categories = get_categories(); ?>
+		 	<ol class="carousel-indicators">
+		 		<?php $count = 0; ?>
+		 		<?php foreach($categories as $category): ?>
+			    	<li data-target="#awesome-carousel" data-slide-to="<?php echo $count; ?>" class="<?php echo ($count==0)? 'active' : ''; ?>"></li>
+			    	<?php $count++; ?>
+			    <?php endforeach; ?>
+		  	</ol>
+		  	<div class="carousel-inner">
+		  		<?php $count = 0; ?>
+				<?php foreach($categories as $category): ?>
+					<?php 
+						$args = [
+							'type' => 'post',
+							'posts_per_page' => 1,
+							'category_name' => $category->slug
+						];
+						$lastBlogPost = new WP_Query($args);
+					 ?>
+					<?php if($lastBlogPost->have_posts()): ?>
+						<?php while($lastBlogPost->have_posts()): ?>
+							<?php $lastBlogPost->the_post(); ?>
+							<?php if(has_post_thumbnail()): ?>
+								<?php $urlImg = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>
+							<?php endif; ?>
+							<div style="background-image: url(<?php echo $urlImg; ?>);" class="carousel-item text-center <?php echo ($count==0)? 'active' : ''; ?>">
+								<div class="carousel-caption d-noned-md-block">
+									<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
+									<small><?php echo($category->name) ?></small>
 								</div>
-							<?php endwhile; ?>
-						<?php endif; ?>
-						<?php wp_reset_postdata(); ?>
-						<?php $count++; ?>
-					<?php endforeach; ?>
-				</div>
-				<a class="carousel-control-prev" href="#awesome-carousel" role="button" data-slide="prev">
-			   	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		    	<span class="sr-only">Previous</span>
-		  		</a>
-				<a class="carousel-control-next" href="#awesome-carousel" role="button" data-slide="next">
-			    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			    <span class="sr-only">Next</span>
-				</a>
+							</div>
+						<?php endwhile; ?>
+					<?php endif; ?>
+					<?php wp_reset_postdata(); ?>
+					<?php $count++; ?>
+				<?php endforeach; ?>
 			</div>
+			<a class="carousel-control-prev" href="#awesome-carousel" role="button" data-slide="prev">
+		   	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    	<span class="sr-only">Previous</span>
+	  		</a>
+			<a class="carousel-control-next" href="#awesome-carousel" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+			</a>
 		</div>
 		<div class="row">
 			<div class="col-12 col-sm-8">
