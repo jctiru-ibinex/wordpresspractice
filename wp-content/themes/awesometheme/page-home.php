@@ -26,7 +26,7 @@
 							<?php if(has_post_thumbnail()): ?>
 								<?php $urlImg = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>
 							<?php endif; ?>
-							<div style="background-image: url(<?php echo $urlImg; ?>);" class="carousel-item text-center <?php echo ($count==0)? 'active' : ''; ?>">
+							<div style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)), url(<?php echo $urlImg; ?>);" class="carousel-item text-center <?php echo ($count==0)? 'active' : ''; ?>">
 								<div class="carousel-caption d-noned-md-block">
 									<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
 									<small><?php echo($category->name) ?></small>

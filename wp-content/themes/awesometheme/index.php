@@ -21,10 +21,10 @@
 									<?php $urlImg = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); ?>
 								<?php endif; ?>
 								<div class="blog-element" style="background-image: url(<?php echo $urlImg; ?>);">
-									<div>
+									<header>
 										<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
 										<?php the_category(); ?>
-									</div>
+									</header>
 								</div>
 							</div>
 							<?php //include(locate_template('content-blog.php', false, false)) ?>
