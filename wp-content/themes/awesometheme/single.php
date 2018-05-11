@@ -5,7 +5,7 @@
 				<?php if(have_posts()): ?>
 					<?php while(have_posts()): ?>
 						<?php the_post(); ?>
-							<article id="post-<?php the_ID(); ?>" <?php post_class('pb-5'); ?>>
+						<article id="post-<?php the_ID(); ?>" <?php post_class('pb-5'); ?>>
 							<?php the_post_thumbnail('full', ['class' => 'img-fluid img-thumbnail mx-auto d-block']) ?>
 							<header class="entry-header text-center">
 								<h1 class="entry-title"><?php echo get_the_title(); ?></h1>

@@ -95,6 +95,7 @@ section .section-title {
     }
 }
 
+/* The Carousel*/
 .carousel-item{
     height: 400px;
     /*background: 
@@ -108,6 +109,8 @@ section .section-title {
     background-size: cover;
 }
 
+
+/* Blog Grid */
 .blog-element{
     height: 200px;
     overflow: hidden;

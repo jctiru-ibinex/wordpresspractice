@@ -23,7 +23,7 @@
 								<div class="blog-element" style="background-image: url(<?php echo $urlImg; ?>);">
 									<header>
 										<h1 class="entry-title"><a href="<?php echo esc_url(get_permalink()); ?>"><?php echo get_the_title(); ?></a></h1>
-										<?php the_category(); ?>
+										<?php the_category(' '); ?>
 									</header>
 								</div>
 							</div>

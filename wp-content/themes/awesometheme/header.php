@@ -25,8 +25,8 @@
 									'container' => false,
 									'menu_class' => 'navbar-nav',
 									'menu_id' => ' ')); ?>	
-			</div>		
+			</div>	
+			<?php get_search_form(); ?>	
 		</div>
 	</nav>
-
 	
