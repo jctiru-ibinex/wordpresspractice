@@ -13,6 +13,11 @@
 							</header>
 							<?php the_content(); ?>
 							<hr>
+							<div class="row pb-5">
+								<div class="col-6 text-left"><?php previous_post_link(); ?></div>
+								<div class="col-6 text-right"><?php next_post_link(); ?></div>
+							</div>
+							
 							<?php if(comments_open()): ?>
 								<?php comments_template(); ?>
 							<?php else: ?>

@@ -31,11 +31,33 @@
 							<?php //get_template_part('content' , get_post_format()); ?>
 							<?php 
 								$i++; 
-								if($i==6){
-									break;
-								}
+								// if($i==6){
+								// 	break;
+								// }
 							?>
 						<?php endwhile ?>
+						<div>
+							<?php previous_posts_link('<< Newer Entries'); ?>
+						</div>
+						<div>
+							<?php next_posts_link('Older Entries >>'); ?>
+						</div>
+						<!-- <div>
+							<ul class="pagination">
+						    	<li class="page-item disabled">
+						    		<a class="page-link" href="<?php //echo get_next_posts_link(); ?>">&laquo;</a>
+						    	</li>
+						    	<li class="page-item active">
+						      		<a class="page-link" href="#">1</a>
+						    	</li>
+						    	<li class="page-item">
+						      		<a class="page-link" href="#">2</a>
+						    	</li>
+						    	<li class="page-item">
+						      		<a class="page-link" href="<?php //echo get_previous_posts_link(); ?>">&raquo;</a>
+						    	</li>
+						  	</ul>
+						</div> -->
 					<?php endif; ?>
 				</div>
 			</div>

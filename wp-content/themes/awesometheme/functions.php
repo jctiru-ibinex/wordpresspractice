@@ -53,6 +53,17 @@ function awesome_theme_setup(){
 	    return $atts;
 	}
 	add_filter( 'nav_menu_link_attributes', 'add_specific_menu_location_atts', 1, 3 );
+
+	//Exclude pages from WordPress Search
+	if (!is_admin()) {
+		function wpb_search_filter($query) {
+			if ($query->is_search) {
+				$query->set('post_type', 'post');
+			}
+			return $query;
+		}
+		add_filter('pre_get_posts','wpb_search_filter');
+	}
 }
 add_action('after_setup_theme', 'awesome_theme_setup');
 // add_action('init', 'awesome_theme_setup');
