@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 	<div class="container pt-5">
-		<div id="awesome-carousel" class="carousel slide pb-5" data-ride="carousel">
+		<div id="awesome-carousel" class="carousel slide" data-ride="carousel">
 	  		<?php $categories = get_categories(); ?>
 		 	<ol class="carousel-indicators">
 		 		<?php $count = 0; ?>
