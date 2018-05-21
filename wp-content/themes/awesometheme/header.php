@@ -21,13 +21,22 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<?php //wp_nav_menu([
+								//'theme_location' => 'primary',
+								//'container' => false,
+								//'menu_class' => 'navbar-nav',
+								//'menu_id' => ' ',
+								//'walker' => new Walker_Nav_Primary()
+								//]); ?>
 			<?php wp_nav_menu([
 								'theme_location' => 'primary',
+								'depth' => 2,
 								'container' => false,
 								'menu_class' => 'navbar-nav',
 								'menu_id' => ' ',
-								'walker' => new Walker_Nav_Primary()
-								]); ?>	
+								'walker' => new WP_Bootstrap_Navwalker(),
+								'fallback_cb' => 'WP_Bootstrap_Navwalker::fallback'
+								]); ?>		
 			</div>	
 			<?php get_search_form(); ?>	
 		</div>

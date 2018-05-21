@@ -43,7 +43,7 @@ function awesome_theme_setup(){
 	    }
 	  	return $classes;
 	}
-	add_filter('nav_menu_css_class', 'atg_menu_classes', 1, 3);
+	//add_filter('nav_menu_css_class', 'atg_menu_classes', 1, 3);
 	
 	// Add classes to a tags in li tags in navbar
 	function add_specific_menu_location_atts( $atts, $item, $args ) {
@@ -54,7 +54,7 @@ function awesome_theme_setup(){
 	    }
 	    return $atts;
 	}
-	add_filter( 'nav_menu_link_attributes', 'add_specific_menu_location_atts', 1, 3 );
+	//add_filter( 'nav_menu_link_attributes', 'add_specific_menu_location_atts', 1, 3 );
 
 	//Exclude pages from WordPress Search
 	if (!is_admin()) {
@@ -93,4 +93,6 @@ function awesome_widget_setup(){
 add_action('widgets_init','awesome_widget_setup');
 
 // Walker require
-require get_template_directory()."./inc/walker.php";
+//require get_template_directory()."./inc/walker.php";
+// Bootstrap walker
+require_once get_template_directory() . './inc/class-wp-bootstrap-navwalker.php';
