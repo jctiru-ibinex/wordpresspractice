@@ -21,10 +21,13 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<?php wp_nav_menu(array('theme_location' => 'primary',
-									'container' => false,
-									'menu_class' => 'navbar-nav',
-									'menu_id' => ' ')); ?>	
+			<?php wp_nav_menu([
+								'theme_location' => 'primary',
+								'container' => false,
+								'menu_class' => 'navbar-nav',
+								'menu_id' => ' ',
+								'walker' => new Walker_Nav_Primary()
+								]); ?>	
 			</div>	
 			<?php get_search_form(); ?>	
 		</div>
