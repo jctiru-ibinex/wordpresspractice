@@ -10,6 +10,10 @@
 						<?php endwhile ?>
 					<?php endif; ?>
 				</div>
+				<div class="row">
+					<?php //the_posts_pagination(); ?>
+					<?php echo get_paginated_numbers(); ?>
+				</div>
 			</div>
 			<div class="col-12 col-sm-4">
 				<?php get_sidebar(); ?>

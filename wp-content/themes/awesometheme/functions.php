@@ -99,3 +99,6 @@ add_action('widgets_init','awesome_widget_setup');
 //require get_template_directory()."./inc/walker.php";
 // Bootstrap walker
 require_once get_template_directory() . './inc/class-wp-bootstrap-navwalker.php';
+
+// Pagination Helper
+require_once get_template_directory() . './inc/pagination.php';
