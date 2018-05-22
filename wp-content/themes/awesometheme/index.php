@@ -37,10 +37,13 @@
 							?>
 						<?php endwhile ?>
 						<div>
-							<?php previous_posts_link('<< Newer Entries'); ?>
+							<?php //previous_posts_link('<< Newer Entries'); ?>
 						</div>
 						<div>
-							<?php next_posts_link('Older Entries >>'); ?>
+							<?php //next_posts_link('Older Entries >>'); ?>
+						</div>
+						<div class="mx-auto pt-3">
+							<?php echo get_paginated_numbers([]); ?>
 						</div>
 						<!-- <div>
 							<ul class="pagination">
