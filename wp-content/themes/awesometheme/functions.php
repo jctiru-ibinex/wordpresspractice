@@ -3,11 +3,7 @@
 function awesome_script_enqueue(){
 	// CSS
 	// wp_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css', array(), null, 'all');
-	// wp_enqueue_style('bootswatch-sketchy', 'https://bootswatch.com/4/sketchy/bootstrap.min.css', array(), null, 'all');
-	 wp_enqueue_style('bootswatch-darkly', 'https://bootswatch.com/4/darkly/bootstrap.min.css', array(), null, 'all');
-	// wp_enqueue_style('bootswatch-solar', 'https://bootswatch.com/4/solar/bootstrap.min.css', array(), null, 'all');
-	//wp_enqueue_style('bootswatch-minty', 'https://bootswatch.com/4/minty/bootstrap.min.css', array(), null, 'all');
-	// wp_enqueue_style('bootswatch-lux', 'https://bootswatch.com/4/lux/bootstrap.min.css', array(), null, 'all');
+	wp_enqueue_style('bootswatch-darkly', 'https://bootswatch.com/4/darkly/bootstrap.min.css', array(), null, 'all');
 	wp_enqueue_style('fontawesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', array(), null, 'all');
 	wp_enqueue_style('customstyle', get_template_directory_uri(). '/css/awesome.css', array(), null, 'all');
 	// JS
@@ -24,37 +20,12 @@ add_action('wp_enqueue_scripts', 'awesome_script_enqueue');
 
 // Initializing the theme
 function awesome_theme_setup(){
-	// add_theme_support('custom-background');
-	// add_theme_support('custom-header');
 	add_theme_support('post-thumbnails');
 	add_theme_support('post-formats', array('aside', 'image', 'video'));
 	add_theme_support('menus');
 	add_theme_support('html5', array('search-form'));
 	register_nav_menu('primary', 'Primary Header Navigation');
 	register_nav_menu('secondary', 'Footer Navigation');
-	
-	// Add classes to li tags in navbar
-	function atg_menu_classes($classes, $item, $args) {
-		if($args->theme_location == 'primary') {
-			if(in_array('current-menu-item', $classes)){
-				$classes[] = 'active';
-			}
-			$classes[] = 'nav-item';
-	    }
-	  	return $classes;
-	}
-	//add_filter('nav_menu_css_class', 'atg_menu_classes', 1, 3);
-	
-	// Add classes to a tags in li tags in navbar
-	function add_specific_menu_location_atts( $atts, $item, $args ) {
-	    // check if the item is in the primary menu
-	    if( $args->theme_location == 'primary' ) {
-	    	// add the desired attributes:
-	    	$atts['class'] = 'nav-link';
-	    }
-	    return $atts;
-	}
-	//add_filter( 'nav_menu_link_attributes', 'add_specific_menu_location_atts', 1, 3 );
 
 	//Exclude pages from WordPress Search
 	if (!is_admin()) {
@@ -69,18 +40,18 @@ function awesome_theme_setup(){
 
 	// Don't add the meta name generator which is WPVersion for security purposes
 	add_filter('the_generator', function(){return '';});
+
+	// Remove Query Strings from Static Resources
+	function _remove_script_version( $src ){
+		$parts = explode( '?ver', $src );
+		return $parts[0];
+	}
+	add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
+	add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
 }
 add_action('after_setup_theme', 'awesome_theme_setup');
-// add_action('init', 'awesome_theme_setup');
 
-// Remove Query Strings from Static Resources
-function _remove_script_version( $src ){
-	$parts = explode( '?ver', $src );
-	return $parts[0];
-}
-add_filter( 'script_loader_src', '_remove_script_version', 15, 1 );
-add_filter( 'style_loader_src', '_remove_script_version', 15, 1 );
-
+// Custom widget
 function awesome_widget_setup(){
 	register_sidebar([
         'name' => 'Sidebar',
@@ -95,8 +66,6 @@ function awesome_widget_setup(){
 }
 add_action('widgets_init','awesome_widget_setup');
 
-// Walker require
-//require get_template_directory()."./inc/walker.php";
 // Bootstrap walker
 require_once get_template_directory() . './inc/class-wp-bootstrap-navwalker.php';
 
