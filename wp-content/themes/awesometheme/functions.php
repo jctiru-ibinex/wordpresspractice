@@ -31,7 +31,7 @@ function awesome_theme_setup(){
 	if (!is_admin()) {
 		function wpb_search_filter($query) {
 			if ($query->is_search) {
-				$query->set('post_type', 'post');
+				$query->set('post_type', ['post' , 'portfolio']);
 			}
 			return $query;
 		}
@@ -98,7 +98,7 @@ function awesome_custom_post_type(){
 		'capability_type' => 'post',
 		'hierarchical' => false,
 		'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'revisions'],
-		'taxonomies' => ['category', 'post_tag'],
+		//'taxonomies' => ['category', 'post_tag'],
 		'menu_position' => 5,
 		'exclude_from_search' => false,
 		'menu_icon' => 'dashicons-id-alt'
@@ -106,6 +106,44 @@ function awesome_custom_post_type(){
 	register_post_type('portfolio', $args);
 }
 add_action('init', 'awesome_custom_post_type');
+
+// Custom Taxonomy
+function awesome_custom_taxonomies(){
+	//Add new taxonomy hierarchical
+	$labels = [
+		'name' => 'Fields',
+		'singular_name' => 'Field',
+		'search_items' => 'Search Fields',
+		'all_items' => 'All Fields',
+		'parent_item' => 'Parent Field',
+		'parent_item_colon' => 'Parent Field:',
+		'edit_item' => 'Edit Field',
+		'update_item' => 'Update Field',
+		'add_new_item' => 'Add New Field',
+		'new_item_name' => 'New Field Name',
+		'menu_name' => 'Fields'
+	];
+	$args = [
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => ['slug' => 'field']
+		// mysite.com/slug
+		// mysite.com/rewrite-taxonomy/slug
+	];
+	register_taxonomy('field', ['portfolio'], $args);
+
+	//Add new taxonomy not hierarchical
+	register_taxonomy('software', 'portfolio', [
+		'label' => 'Software',
+		'rewrite' => ['slug' => 'software'],
+		'hierarchical' => false,
+		'show_admin_column' => true
+	]);
+}
+add_action('init', 'awesome_custom_taxonomies');
 
 /* Flush rewrite rules for custom post types. */
 add_action( 'after_switch_theme', 'flush_rewrite_rules' );

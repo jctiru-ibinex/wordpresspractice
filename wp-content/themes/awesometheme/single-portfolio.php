@@ -9,7 +9,19 @@
 							<?php the_post_thumbnail('full', ['class' => 'img-fluid img-thumbnail mx-auto d-block']) ?>
 							<header class="entry-header text-center">
 								<h1 class="entry-title"><?php echo get_the_title(); ?></h1>
-								<small>Posted on: <?php the_time('F j, Y'); ?> at <?php the_time('g:i a'); ?>, in <?php the_category(' '); ?> || <?php the_tags(); ?> || <?php edit_post_link('Edit article'); ?></small>
+								<?php 
+									$terms = wp_get_post_terms($post->ID, 'field');
+									$arrField = [];
+									foreach($terms as $term){
+										$arrField[] = '<a href="' . get_term_link($term) . '">' . $term->name . '</a>';
+									}
+									$terms = wp_get_post_terms($post->ID, 'software');
+									$arrSoft = [];
+									foreach($terms as $term){
+										$arrSoft[] = '<a href="' . get_term_link($term) . '">' . $term->name . '</a>';
+									}
+								 ?>
+								<small>Posted on: <?php the_time('F j, Y'); ?> at <?php the_time('g:i a'); ?>, in <?php echo implode(', ', $arrField); ?> || <?php echo implode(', ', $arrSoft) ?> || <?php edit_post_link('Edit article'); ?></small>
 							</header>
 							<?php the_content(); ?>
 							<hr>
