@@ -22,6 +22,10 @@ class PracticePlugin {
 		add_action('init', [$this, 'custom_post_type']);
 	}
 
+	function register_scripts(){
+		add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+	}
+
 	function activate(){
 		// Generate CPT
 		//$this->custom_post_type();
@@ -42,10 +46,17 @@ class PracticePlugin {
 	function custom_post_type(){
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
+
+	function enqueue(){
+		// Enqueue all scripts
+		wp_enqueue_style( 'practicepluginstyle', plugins_url('/assets/style.css',  __FILE__), [], null, 'all');
+		wp_enqueue_script( 'practicepluginscript', plugins_url('/assets/script.js',  __FILE__), [], null, true);
+	}
 }
 
 if(class_exists('PracticePlugin')){
 	$practicePlugin = new PracticePlugin();
+	$practicePlugin->register_scripts();
 }
 
 // activation
