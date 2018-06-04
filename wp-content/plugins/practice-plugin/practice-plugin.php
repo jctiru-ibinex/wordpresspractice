@@ -22,25 +22,16 @@ class PracticePlugin {
 		add_action('init', [$this, 'custom_post_type']);
 	}
 
-	function register_scripts(){
+	function register(){
 		add_action('admin_enqueue_scripts', [$this, 'enqueue']);
 	}
 
 	function activate(){
-		// Generate CPT
-		//$this->custom_post_type();
-		// Flush rewrite rules
 		flush_rewrite_rules();
 	}
 
 	function deactivate(){
-		// Flush rewrite rules
 		flush_rewrite_rules();
-	}
-
-	function uninstall(){
-		// Delete CPT
-		// Delete all the plugin data from the DB
 	}
 
 	function custom_post_type(){
@@ -56,12 +47,10 @@ class PracticePlugin {
 
 if(class_exists('PracticePlugin')){
 	$practicePlugin = new PracticePlugin();
-	$practicePlugin->register_scripts();
+	$practicePlugin->register();
 }
 
 // activation
 register_activation_hook( __FILE__, [$practicePlugin, 'activate'] );
 // deactivation
 register_deactivation_hook( __FILE__, [$practicePlugin, 'deactivate']);
-// uninstall
-register_uninstall_hook( __FILE__, [$practicePlugin]);
